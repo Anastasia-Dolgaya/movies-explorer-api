@@ -10,7 +10,7 @@ const { router } = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { cors } = require('./middlewares/cors');
 
-const { PORT = 3000, NODE_ENV, DATABASE_URL } = process.env;
+const { PORT = 3002, NODE_ENV, DATABASE_URL } = process.env;
 
 const app = express();
 app.use(cors);
