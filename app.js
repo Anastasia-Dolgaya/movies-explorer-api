@@ -10,7 +10,7 @@ const { router } = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { cors } = require('./middlewares/cors');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, DATABASE_URL } = process.env;
 
 const app = express();
 app.use(cors);
@@ -26,7 +26,7 @@ app.use(requestLogger);
 
 app.use(limiter);
 
-mongoose.connect(process.env.DATABASE_URL, {
+mongoose.connect(NODE_ENV === 'production' ? DATABASE_URL : 'mongodb://localhost:27017/moviesdb', {
   useNewUrlParser: true,
 });
 
