@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -6,9 +7,10 @@ const { errors } = require('celebrate');
 const helmet = require('helmet');
 const { limiter } = require('./middlewares/limiter');
 const errorsHandler = require('./middlewares/errorsHandler');
-const { router } = require('./routes/index');
+const { router } = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { cors } = require('./middlewares/cors');
+const { dbDevUrl } = require('./utils/bd-config');
 
 const { PORT = 3002, NODE_ENV, DATABASE_URL } = process.env;
 
@@ -26,7 +28,7 @@ app.use(requestLogger);
 
 app.use(limiter);
 
-mongoose.connect(NODE_ENV === 'production' ? DATABASE_URL : 'mongodb://localhost:27017/moviesdb', {
+mongoose.connect(NODE_ENV === 'production' ? DATABASE_URL : dbDevUrl, {
   useNewUrlParser: true,
 });
 

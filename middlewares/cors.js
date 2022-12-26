@@ -4,7 +4,6 @@ const allowedCors = [
   'https://leela.mesto.nomoredomains.club',
 ];
 
-// eslint-disable-next-line consistent-return
 module.exports.cors = (req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
@@ -22,4 +21,5 @@ module.exports.cors = (req, res, next) => {
     return res.end();
   }
   next();
+  return undefined;
 };
