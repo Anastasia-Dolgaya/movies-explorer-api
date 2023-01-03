@@ -13,12 +13,14 @@ const {
 
 const { DELETE_MOVIE_MESSAGE } = require('../utils/constants');
 
-module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
-    .populate('owner')
-    .then((movies) => movies.filter((movie) => movie.owner._id.toString() === req.user._id))
-    .then((movies) => res.send(movies))
-    .catch(next);
+module.exports.getMovies = async (req, res, next) => {
+  try {
+    const movies = await Movie.find({ owner: req.user._id })
+      .populate('owner');
+    res.send(movies);
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports.createMovie = async (req, res, next) => {
