@@ -1,7 +1,7 @@
 const allowedCors = [
   'http://localhost:3000',
-  'http://leela.mesto.nomoredomains.club',
-  'https://leela.mesto.nomoredomains.club',
+  'http://leela.diploma.nomoredomains.club',
+  'https://leela.diploma.nomoredomains.club',
 ];
 
 module.exports.cors = (req, res, next) => {
